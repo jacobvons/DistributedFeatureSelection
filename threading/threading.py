@@ -1,6 +1,7 @@
 import threading
 import time
 import logging
+from scikit_feature.skfeature.function.similarity_based import SPEC
 
 THREAD_COUNT = 10
 
@@ -17,6 +18,13 @@ def range_sum(index, arr):
     sums[index] = my_sum
     logging.info("Thread %s returns a sum of %d", index, my_sum)
 
+def feature_select(id, data, h):
+    scores = SPEC.spec(data)
+    ranked_features = SPEC.feature_ranking(scores)
+    selected = ranked_features[0:h]
+    for feature in selected:
+        logging.info("Thread %s selects" + str(feature), index)
+    return selected
 
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
