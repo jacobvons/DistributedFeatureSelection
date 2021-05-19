@@ -1,4 +1,4 @@
-<mxfile modified="2021-05-19T15:00:11.188Z" host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="RwIXznLoINNACFwPVvPs" version="14.6.12" type="github">
+<mxfile modified="2021-05-19T15:30:33.276Z" host="app.diagrams.net" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="6A3RrhJjZjxiB5vovYCa" version="14.6.12" type="github">
   <diagram id="C2fSY1v2SiZeoUbDoYyL" name="Page-1">
     <mxGraphModel dx="1422" dy="756" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -2279,6 +2279,9 @@
         </mxCell>
         <mxCell id="gCJOcr9IJ2qqbmro8zUT-712" value="Step 3 :" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;rotation=0;" vertex="1" parent="gCJOcr9IJ2qqbmro8zUT-333">
           <mxGeometry y="30" width="191.5" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="gCJOcr9IJ2qqbmro8zUT-737" value="&lt;font style=&quot;font-size: 17px&quot;&gt;Parallel Computing&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;rotation=0;" vertex="1" parent="gCJOcr9IJ2qqbmro8zUT-733">
+          <mxGeometry x="160" y="260" width="191.5" height="18" as="geometry" />
         </mxCell>
         <mxCell id="gCJOcr9IJ2qqbmro8zUT-736" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="910" y="210" width="191.5" height="90" as="geometry" />
