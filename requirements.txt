@@ -4,3 +4,5 @@ scikit-learn==0.24.1
 scipy==1.6.3
 skfeature==1.0.0
 threadpoolctl==2.1.0
+
+pandas~=1.2.4

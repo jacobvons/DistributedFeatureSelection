@@ -6,7 +6,7 @@ This file contains core functions for the iterative converge process
 def get_top_h(feature_dicts: list, h: int) -> list:
     """
     From all features from all nodes, choose top h features according to their importance value
-    and output the features
+    and output the features.
     :param feature_dicts: list, contains feature dicts from all nodes with feature name being the key and
     feature "importance value" being the value
     :param h: int, number of features we want to select

@@ -6,6 +6,7 @@ We combine the ranking for each subset by voting
 """
 import numpy as np
 
+
 def voting(feature_ranking, total_n):
     """
     Inputs:

@@ -136,3 +136,6 @@ dmypy.json
 
 # Scikit-feature
 *,cover
+
+# CSV files
+*.csv
