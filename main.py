@@ -4,7 +4,6 @@ import pandas as pd
 import random
 import numpy as np
 from scikit_feature.skfeature.function.information_theoretical_based import CIFE
-from scikit_feature.skfeature.function.similarity_based import fisher_score
 from conv_iter import *
 from functools import reduce
 
@@ -93,7 +92,8 @@ def fs_method(arr, headers, n_features):
     FEATURES.append(fs)
 
 
-file_pref = "./split/Aligned_0_"
+if not os.path.exists("./split"):
+    split_data()
 
 file_dir = "./split"
 split_files = [f for f in os.listdir(file_dir) if f.endswith(".csv")]
