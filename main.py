@@ -6,6 +6,7 @@ import numpy as np
 from scikit_feature.skfeature.function.information_theoretical_based import CIFE
 from conv_iter import *
 from functools import reduce
+import time
 
 # Hyper parameters
 N = 500  # Number of rows grouped together
@@ -93,6 +94,8 @@ def fs_method(arr, headers, n_features):
 
 
 if not os.path.exists("./split"):
+    print("Splitting data. Will take several minutes.")
+    print("Make some tea while you wait...")
     split_data()
 
 file_dir = "./split"
@@ -100,8 +103,6 @@ split_files = [f for f in os.listdir(file_dir) if f.endswith(".csv")]
 row_group_num = max([int(f.split("_")[1]) for f in split_files])
 # for i in range(0, row_group_num+1):  # Production
 for i in range(0, 1):  # Testing first row group
-    global ROW_FEATURES
-    global FEATURES
     for iter_num in range(0, MAT_ITER):
         FEATURES = []
         threads = []
@@ -126,14 +127,14 @@ for i in range(0, 1):  # Testing first row group
             for file_name in row_group_i_files:
                 file_df = pd.read_csv(file_name)
                 headers = file_df.columns
-                all_headers.append(headers)
+                all_headers.append(headers.values)
                 if feature_name in headers:
                     top_h_values[feature_name] = file_df[feature_name].values
                     break
 
         # Test if converged (or reached iteration maximum)
         # If converged, save the result and continue to next
-        if reduce(lambda a, b: a and b, [node_converged(node_fs, top_h) for node_fs in all_headers]) \
+        if reduce(lambda a, b: a and b, [node_converged(list(node_fs), list(top_h)) for node_fs in all_headers]) \
                 or iter_num == MAT_ITER-1:
             # Save result features
             ROW_FEATURES.append(top_h)
