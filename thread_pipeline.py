@@ -7,12 +7,16 @@ import random
 
 THREAD_COUNT = 10
 
-def thread_ping(name):
-    logging.info("Thread %s starts", name)
-    time.sleep(2)
-    logging.info("Thread %s returns", name)
+recv_buffers = [[]] * THREAD_COUNT
+local_data_stores = [np.array()] * THREAD_COUNT
 
-def feature_select(id, data, h):
+def deploy_sends(id, instructions):
+    # Structure of an instruction is as follows
+    # (receiver_id, [columns])
+    for (receiver_id, columns) in instructions:
+        recv_buffers[receiver_id].append(local_data_stores[id][:, [columns]])
+
+def feature_select(id, data):
     print(str(id) + ": " + str(data))
     scores = SPEC.spec(data)
     ft_dict = {}
@@ -20,12 +24,6 @@ def feature_select(id, data, h):
         print(str(id) + ": Score for feature " + str(index) + ": " + str(score))
         ft_dict[index] = score
     selected[id] = ft_dict
-    # ranked_features = SPEC.feature_ranking(scores)
-    # selected_inner = ranked_features[0:h]
-    # for feature in selected_inner:
-        # logging.info("Thread %s selects" + str(feature), id)
-        # selected[id].append(feature)
-    # return selected_inner
 
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
@@ -33,7 +31,7 @@ if __name__ == '__main__':
     threads = []
     selected = [{}] * THREAD_COUNT
     print(len(selected))
-    entire_dataset = np.array(20,)
+    entire_dataset = np.array(100,)
     for i in range(THREAD_COUNT):
         # arr = range(i, 100)
         # threads.append(threading.Thread(target=range_sum, args=(i,arr,)))
@@ -41,16 +39,16 @@ if __name__ == '__main__':
 
         # Need it in the form of a 2d numpy array
         whole_data = []
-        for j in range(20):
+        for j in range(100):
             col = []
-            for k in range(100):
+            for k in range(20):
                 col.append(random.randint(0, 100))
             whole_data.append(col)
         npArray = np.array(whole_data)
         if i == 0:
             entire_dataset = npArray
         else:
-            entire_dataset = np.concatenate((npArray, entire_dataset), axis=1)
+            entire_dataset = np.concatenate((npArray, entire_dataset), axis=0)
         print(str(i) + " generates data: " + str(npArray) + " with shape " + str(npArray.shape))
         threads.append(threading.Thread(target=feature_select, args=(i,npArray,5)))
     for thread in threads:
@@ -59,5 +57,10 @@ if __name__ == '__main__':
     for (index, thread) in enumerate(threads):
         thread.join()
         logging.info("Main: Thread %d joins", index)
+    # Now check that these feature selections match up with what we expect
+    print(entire_dataset.shape)
+    actual_scores = SPEC.spec(entire_dataset)
+    for (index, score) in enumerate(actual_scores):
+        print("Actual Score for feature " + str(index) + ": " + str(score))
     logging.info("Main: all done")
     
